@@ -1,7 +1,7 @@
 # News Recommendation System
 
 ## About
-A internet-based news aggregator, providing hot news from popular news sources, with recommendation feature based on users' preference.
+An internet-based news aggregator, providing hot news scraping on popular news sources, with recommendation feature based on users' preference with the help of Machine Learning.
 
 ## Tech stack:
 - Front end:( React, Node.js, JWT)
