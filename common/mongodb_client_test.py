@@ -1,16 +1,18 @@
+#!/usr/bin/env python
+""" mongodb client """
+
 import mongodb_client as client
 
-''' CRUD test, to ensure we can manipulate tap-news later '''
-
 def test_basic():
-    db = client.get_db('test')
-    db.demo.drop()
-    assert db.demo.count() == 0
-    db.demo.insert({'test':123})
-    assert db.demo.count() == 1
-    db.demo.drop()
-    assert db.demo.count() == 0
-    print 'test_basic passed!'
+    """ test basic """
+    db_name = client.get_db('test')
+    db_name.testCollection.drop()
+    assert db_name.testCollection.count() == 0
+    db_name.testCollection.insert({'test': 1, 'hello': 'world'})
+    assert db_name.testCollection.count() == 1
+    db_name.testCollection.drop()
+    assert db_name.testCollection.count() == 0
+    print 'test_basic passed.'
 
 if __name__ == "__main__":
     test_basic()

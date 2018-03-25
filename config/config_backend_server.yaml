@@ -12,5 +12,6 @@ operations:
     NEWS_LIMIT : 100
     NEWS_LIST_BATCH_SIZE : 10
     USER_NEWS_TIME_OUT_IN_SECONDS : 60
-    LOG_CLICKS_TASK_QUEUE_URL : 'amqp://tkaptoww:acPAHfHFf-uIpoR7vlR_uh4ehMlCAuv7@otter.rmq.cloudamqp.com/tkaptoww'
+    LOG_CLICKS_TASK_QUEUE_URL : 'LOG_CLICKS_TASK_QUEUE_URL = "amqp://tkaptoww:acPAHfHFf-uIpoR7vlR_uh4ehMlCAuv7@otter.rmq.cloudamqp.com/tkaptoww"
+'
     LOG_CLICKS_TASK_QUEUE_NAME : "tap-news-log-clicks-task-queue"

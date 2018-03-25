@@ -1,12 +1,16 @@
+#!/usr/bin/env python
+""" Mongo Client """
 from pymongo import MongoClient
 
-MONGO_DB_HOST = 'localhost'
-MONGO_DB_PORT = '27017'
-DB_NAME = 'tap-news'
+# get config
+import config_client
+config = config_client.get_config('../config/config_common.yaml');
+MONGO_DB_HOST = config['mongodb_client']['MONGO_DB_HOST']
+MONGO_DB_PORT = config['mongodb_client']['MONGO_DB_PORT']
+DB_NAME = config['mongodb_client']['DB_NAME']
 
-""" singleton  pattern """
-client = MongoClient("%s:%s" % (MONGO_DB_HOST, MONGO_DB_PORT))
+CLIENT = MongoClient("%s:%s" % (MONGO_DB_HOST, MONGO_DB_PORT))
 
-def get_db( db=DB_NAME ):
-    db = client[db]
-    return db
+def get_db(db_name=DB_NAME):
+    ''' get db with name of db'''
+    return CLIENT[db_name]

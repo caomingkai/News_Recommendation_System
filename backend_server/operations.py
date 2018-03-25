@@ -12,9 +12,9 @@ from datetime import datetime
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
 import mongodb_client
-# import news_recommendation_service_client
+import news_recommendation_service_client
 
-from cloudAMQP_client import CloudAMQPClient
+from cloud_amqp_client import CloudAMQPClient
 
 # get config
 import config_client
@@ -29,8 +29,8 @@ NEWS_LIMIT = config['operations']['NEWS_LIMIT']
 NEWS_LIST_BATCH_SIZE = config['operations']['NEWS_LIST_BATCH_SIZE']
 USER_NEWS_TIME_OUT_IN_SECONDS = config['operations']['USER_NEWS_TIME_OUT_IN_SECONDS']
 
-LOG_CLICKS_TASK_QUEUE_URL = config['operations']['LOG_CLICKS_TASK_QUEUE_URL']
-LOG_CLICKS_TASK_QUEUE_NAME = config['operations']['LOG_CLICKS_TASK_QUEUE_NAME']
+LOG_CLICKS_TASK_QUEUE_URL = "amqp://tkaptoww:acPAHfHFf-uIpoR7vlR_uh4ehMlCAuv7@otter.rmq.cloudamqp.com/tkaptoww"
+LOG_CLICKS_TASK_QUEUE_NAME = "tap-news-log-clicks-task-queue"
 
 redis_client = redis.StrictRedis(REDIS_HOST, REDIS_PORT, db=0)
 cloudAMQP_client = CloudAMQPClient(LOG_CLICKS_TASK_QUEUE_URL, LOG_CLICKS_TASK_QUEUE_NAME)
@@ -64,9 +64,11 @@ def getNewsSummariesForUser(user_id, page_num):
 
         sliced_news = total_news[begin_index:end_index]
 
-    '''
     # Get preference for the user
     preference = news_recommendation_service_client.getPreferenceForUser(user_id)
+    print "-----------------222-----------------"
+    print preference
+    print "-----------------222-----------------"
     topPreference = None
 
     if preference is not None and len(preference) > 0:
@@ -79,7 +81,6 @@ def getNewsSummariesForUser(user_id, page_num):
             news['reason'] = 'Recommend'
         if news['publishedAt'].date() == datetime.today().date():
             news['time'] = 'today'
-    '''
     return json.loads(dumps(sliced_news))
 
 
@@ -141,7 +142,6 @@ def addOne(key, expire_seconds=DEFAULT_EXPIRE_SECONDS):
     '''
     common add one on given key
     '''
-
     if redis_client.get(key) is None:
         count = 0
     else:
@@ -149,6 +149,7 @@ def addOne(key, expire_seconds=DEFAULT_EXPIRE_SECONDS):
     redis_client.set(key, count + 1)
     redis_client.expire(key, expire_seconds)
     print count
+
 
 def update_hour_clicking_number():
     '''
@@ -213,26 +214,6 @@ def get_user_device(user_agent):
             return agent
     return devices[-1]
 
-# TODO config
-classes = [
-    "Colleges & Schools",
-    "Environmental",
-    "World",
-    "Entertainment",
-    "Media",
-    "Politics & Government",
-    "Regional News",
-    "Religion",
-    "Sports",
-    "Technology",
-    "Traffic",
-    "Weather",
-    "Economic & Corp",
-    "Advertisements",
-    "Crime",
-    "Other",
-    "Magazine"
-]
 
 def update_news_category(news_category):
     print "news_category:%s", news_category
