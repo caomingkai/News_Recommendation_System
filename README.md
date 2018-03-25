@@ -2,8 +2,8 @@
 
 ## About
 An internet-based news aggregator, providing hot news scraping on popular news sources, with recommendation feature based on users' preference with the help of Machine Learning.
-![work flow chart](https://github.com/caomingkai/News_Recommendation_System/raw/master/chart.jpg =250x)
-<img src="chart1.jpg" alt="Drawing" style="width: 100px;"/>
+![chart](https://github.com/caomingkai/News_Recommendation_System/raw/master/chart.jpg){ width=50% }
+
 ## Tech stack:
 - __Front end:( React, Node.js, JWT)__
     + Built a responsive single-page web application for users to browse news (React, Node.js, RPC, SOA, JWT)
