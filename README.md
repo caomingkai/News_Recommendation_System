@@ -4,7 +4,7 @@
 An internet-based news aggregator, providing hot news scraping on popular news sources, with recommendation feature based on users' preference with the help of Machine Learning.
 
 #### Chart with Machine Learning module for news topic classification
-![chart](https://github.com/caomingkai/News_Recommendation_System/raw/master/with%20ML%20topic%20classification.png)
+![chart](https://github.com/caomingkai/News_Recommendation_System/raw/master/with%20ML%20topic%20classification1.png)
 
 #### Chart with Recommendation module to match user preference
 ![chart](https://github.com/caomingkai/News_Recommendation_System/raw/master/with%20Recommendation%20module.png)
